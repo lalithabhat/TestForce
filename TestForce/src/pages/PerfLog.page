@@ -1,0 +1,59 @@
+<apex:page showHeader="true" sidebar="false" controller="PerfLogController">
+<script src="{!URLFOR($Resource.PerfLog_Resources, 'js/jquery.min.js')}"></script>
+<script src="{!URLFOR($Resource.PerfLog_Resources, 'js/jquery.reveal.js')}"></script>
+<script type="text/javascript" src="https://www.google.com/jsapi?autoload={'modules':[{'name':'visualization',
+       'version':'1','packages':['corechart']}]}"></script>
+<apex:stylesheet value="{!URLFOR($Resource.PerfLog_Resources, 'css/reveal.css')}" />
+<apex:stylesheet value="{!URLFOR($Resource.PerfLog_Resources, 'css/PerfLogCSS.css')}" />
+
+	<div class="wrapper">
+		<div id="loadingContainer">
+			<div class="loading">
+				<img src="/img/loading32.gif" />
+			</div>
+		</div>
+		<div id="logModal" class="reveal-modal">
+		     <h1>Apex log</h1>
+		     <p></p>
+		     <a class="close-reveal-modal">&#215;</a>
+		</div>
+		<div id="fullLogModal" class="reveal-modal">
+		     <h1>Apex log</h1>
+		     <p></p>
+		     <a class="close-reveal-modal">&#215;</a>
+		</div>
+		<div id="logPopup">
+			<div class="logPopupContent">
+				
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="vfPageUrlInput" class="form-item">Choose Visualforce page</label>
+			<select id="vfPageUrlInput">
+				<apex:repeat value="{!apexPages}" var="pageName">
+					<option value="{!pageName}">{!pageName}</option>
+				</apex:repeat>
+			</select>
+		</div>
+		<div class="form-group">
+			<label for="objectIdInput" class="form-item">Enter object ID (optional)</label>
+			<input type="text" id="objectIdInput"/>
+		</div>
+		<div class="form-group">
+		 <a href="javascript:startLogging();" >Start testing</a>
+		</div>
+		<div class="form-group" id="generalLoggingInfo" style="display:none;">
+			<div>
+				<b>Total generation time:</b> <span id="totalGenerationTime"></span> ms
+			</div>
+			<div>
+				<a href="#" data-reveal-id="fullLogModal" data-animation="fadeAndPop" data-animationspeed="300" data-closeonbackgroundclick="true" data-dismissmodalclass="close-reveal-modal">Show full log</a>
+			</div>
+		</div>
+		<div id="ganttChart">
+		 <!--div id="testPageFrame" style="width:270px;height:192px;" /-->
+		</div>
+	</div>
+	
+	<script src="{!URLFOR($Resource.PerfLog_Resources, 'js/PerfLogJS.js')}" />
+</apex:page>
